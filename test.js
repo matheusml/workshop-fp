@@ -72,7 +72,7 @@ describe('Functional Programming Workshop', function() {
           {name: 'Maria', grade: 9}
       ];
       
-      var grades = function() {};
+      var grades;
       
       assert.deepEqual(grades(students), [6, 4, 9]);
     });
@@ -95,7 +95,7 @@ describe('Functional Programming Workshop', function() {
           {name: 'Maria', grade: 9}
       ];
       
-      var filterApprovedStudents = function() {};
+      var filterApprovedStudents;
       
       assert.deepEqual(filterApprovedStudents(), 
         [{name: 'Anna',  grade: 6},
@@ -111,9 +111,46 @@ describe('Functional Programming Workshop', function() {
           {name: 'Maria', grade: 9}
       ];
       
-      var filterApprovedStudentsByName = function() {};
+      var filterApprovedStudentsByName;
       
       assert.deepEqual(filterApprovedStudentsByName(), ['Anna',  'Maria']);
+    });
+  });
+  
+  describe('Reduce', function () {
+    it('returns the total sum', function () {
+      var numbers = [1, 2, 3, 4];
+      var sum = numbers.reduce(function(previous, current) {
+         return previous + current; 
+      }, 0);
+      
+      assert.deepEqual(sum, 10);
+    });
+    
+    it('returns the combined names', function () {
+      var students = [
+          {name: 'Anna',  grade: 6},
+          {name: 'John',  grade: 4},
+          {name: 'Maria', grade: 9}
+      ];
+      
+      var combinedNames;
+      
+      assert.deepEqual(combinedNames, 'AnnaJohnMaria');
+    });
+  });
+  
+  describe('Map + Filter + Reduce', function () {
+    it('returns the total sum of the grades', function () {
+      var students = [
+          {name: 'Anna',  grade: 6},
+          {name: 'John',  grade: 4},
+          {name: 'Maria', grade: 9}
+      ];
+      
+      var totalSumOfTheGrades;
+      
+      assert.deepEqual(totalSumOfTheGrades, 19);
     });
   });
   
