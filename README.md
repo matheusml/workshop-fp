@@ -20,7 +20,7 @@ Ajuste os blocos de código no arquivo ```test.js``` para que os testes passem.
 
 Os ajustes devem seguir duas regras:
 
-1) Não é permitido alterar dados externos à função.
+1) Não modificar dados externos.
 
 ```javascript
 var name = "Matheus";
@@ -38,3 +38,5 @@ var helloName = function() {
 ```
 
 2) While/For não podem ser usados. 
+
+3) Deixe todos os inputs/outputs das funções explícitos como parâmetros
