@@ -124,7 +124,7 @@ describe('Functional Programming Workshop', function() {
          return previous + current; 
       }, 0);
       
-      assert.deepEqual(sum, 10);
+      assert.equal(sum, 10);
     });
     
     it('returns the combined names', function () {
@@ -136,7 +136,7 @@ describe('Functional Programming Workshop', function() {
       
       var combinedNames;
       
-      assert.deepEqual(combinedNames, 'AnnaJohnMaria');
+      assert.equal(combinedNames, 'AnnaJohnMaria');
     });
   });
   
@@ -150,8 +150,61 @@ describe('Functional Programming Workshop', function() {
       
       var totalSumOfTheGrades;
       
-      assert.deepEqual(totalSumOfTheGrades, 19);
+      assert.equal(totalSumOfTheGrades, 19);
     });
+  });
+  
+  describe('Higher Order Functions', function() {
+      it('returns the filtered students', function() {
+        var students = [
+            {name: 'Anna',  grade: 6},
+            {name: 'John',  grade: 4},
+            {name: 'Maria', grade: 9}
+        ];
+        
+        var filterGrade = function(student) {
+            return student.grade > 6;
+        };
+        
+        var filteredStudents = students.filter(filterGrade);
+        
+        assert.deepEqual(filteredStudents, [{name: 'Maria', grade: 9}]);
+      });
+      
+      it('returns the calculation', function() {
+        var sum = function(x, y) {
+            return x + y;
+        };
+        
+        var mult = function(x, y) {
+            return x * y;  
+        };
+        
+        var calculate;
+        
+        assert.equal(calculate(sum, 10, 2), 12);
+        assert.equal(calculate(mult, 10, 2), 20);
+      });
+  });
+  
+  describe('Currying', function() {
+     it('returns the greeting', function() {
+         var greet = function(greeting) {
+           return function(name) {
+                return greeting + " " + name;    
+           };
+         };
+         
+         var greetHello = greet("Hello");
+         
+         assert.equal(greetHello("Matheus"), "Hello Matheus");
+     });
+     
+     it('returns the sum', function() {
+         var sum;
+         
+         assert.equal(sum(2)(3), 6);
+     });
   });
   
 });
