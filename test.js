@@ -1,34 +1,34 @@
 var assert = require('assert');
 
-describe('Functional Programming Workshop', function() {
-  
+describe('Functional Programming Workshop', function () {
+
   describe('Pure Functions', function () {
     it('returns the days in the month', function () {
       // impure
-      var daysThisMonth = function() {
-        var date  = new Date();
-        var year  = date.getFullYear();
+      var daysThisMonth = function () {
+        var date = new Date();
+        var year = date.getFullYear();
         var month = date.getMonth();
         var start = new Date(year, month, 1);
-        var end   = new Date(year, month + 1, 1);
+        var end = new Date(year, month + 1, 1);
         return Math.round((end - start) / (1000 * 60 * 60 * 24));
       };
       
       // impure
-      var daysInMonth = function(year, month) {
+      var daysInMonth = function (year, month) {
         var start = new Date(year, month - 1, 1);
-        var end   = new Date(year, month, 1);
+        var end = new Date(year, month, 1);
         return Math.round((end - start) / (1000 * 60 * 60 * 24));
       };
-      
+
       assert.equal(daysThisMonth(), daysInMonth(2016, 2));
     });
-    
+
     it('returns the increment', function () {
       var counter = 0;
 
       // impure
-      var increment = function() {
+      var increment = function () {
         counter = counter + 1;
         return counter;
       };
@@ -38,12 +38,12 @@ describe('Functional Programming Workshop', function() {
       
       assert.equal(increment(), counter + 1);
     });
-    
+
     it('returns the square', function () {
       var x = 10;
 
       // impure
-      var square = function() {
+      var square = function () {
         x = x * 2;
         return x;
       };
@@ -54,157 +54,157 @@ describe('Functional Programming Workshop', function() {
       assert.equal(square(), x * 2);
     });
   });
-  
+
   describe('Map', function () {
-    it('returns the square roots of the numbers', function() {
+    it('returns the square roots of the numbers', function () {
       var numbers = [1, 4, 9];
-      var roots = numbers.map(function(number) {
-          return Math.sqrt(number);
+      var roots = numbers.map(function (number) {
+        return Math.sqrt(number);
       });
-      
+
       assert.deepEqual(roots, [1, 2, 3]);
     });
-    
+
     it('returns the array of the grades', function () {
       var students = [
-          {name: 'Anna',  grade: 6},
-          {name: 'John',  grade: 4},
-          {name: 'Maria', grade: 9}
+        { name: 'Anna', grade: 6 },
+        { name: 'John', grade: 4 },
+        { name: 'Maria', grade: 9 }
       ];
-      
+
       var grades;
-      
+
       assert.deepEqual(grades(students), [6, 4, 9]);
     });
   });
-  
+
   describe('Filter', function () {
-    it('returns the numbers bigger than 4', function() {
+    it('returns the numbers bigger than 4', function () {
       var numbers = [1, 4, 9];
-      var filteredNumbers = numbers.filter(function(number) {
-          return number > 4;
+      var filteredNumbers = numbers.filter(function (number) {
+        return number > 4;
       });
-      
+
       assert.deepEqual(filteredNumbers, [9]);
     });
-    
+
     it('returns the students with the grade bigger than or equal to 6', function () {
       var students = [
-          {name: 'Anna',  grade: 6},
-          {name: 'John',  grade: 4},
-          {name: 'Maria', grade: 9}
+        { name: 'Anna', grade: 6 },
+        { name: 'John', grade: 4 },
+        { name: 'Maria', grade: 9 }
       ];
-      
+
       var filterApprovedStudents;
-      
-      assert.deepEqual(filterApprovedStudents(), 
-        [{name: 'Anna',  grade: 6},
-         {name: 'Maria', grade: 9}]);
+
+      assert.deepEqual(filterApprovedStudents(),
+        [{ name: 'Anna', grade: 6 },
+          { name: 'Maria', grade: 9 }]);
     });
   });
-  
+
   describe('Map + Filter', function () {
     it('returns the names of the students with the grade bigger than or equal to 6', function () {
       var students = [
-          {name: 'Anna',  grade: 6},
-          {name: 'John',  grade: 4},
-          {name: 'Maria', grade: 9}
+        { name: 'Anna', grade: 6 },
+        { name: 'John', grade: 4 },
+        { name: 'Maria', grade: 9 }
       ];
-      
+
       var filterApprovedStudentsByName;
-      
-      assert.deepEqual(filterApprovedStudentsByName(), ['Anna',  'Maria']);
+
+      assert.deepEqual(filterApprovedStudentsByName(), ['Anna', 'Maria']);
     });
   });
-  
+
   describe('Reduce', function () {
     it('returns the total sum', function () {
       var numbers = [1, 2, 3, 4];
-      var sum = numbers.reduce(function(previous, current) {
-         return previous + current; 
+      var sum = numbers.reduce(function (previous, current) {
+        return previous + current;
       }, 0);
-      
+
       assert.equal(sum, 10);
     });
-    
+
     it('returns the combined names', function () {
       var students = [
-          {name: 'Anna',  grade: 6},
-          {name: 'John',  grade: 4},
-          {name: 'Maria', grade: 9}
+        { name: 'Anna', grade: 6 },
+        { name: 'John', grade: 4 },
+        { name: 'Maria', grade: 9 }
       ];
-      
+
       var combinedNames;
-      
+
       assert.equal(combinedNames, 'AnnaJohnMaria');
     });
   });
-  
+
   describe('Map + Filter + Reduce', function () {
     it('returns the total sum of the grades', function () {
       var students = [
-          {name: 'Anna',  grade: 6},
-          {name: 'John',  grade: 4},
-          {name: 'Maria', grade: 9}
+        { name: 'Anna', grade: 6 },
+        { name: 'John', grade: 4 },
+        { name: 'Maria', grade: 9 }
       ];
-      
+
       var totalSumOfTheGrades;
-      
+
       assert.equal(totalSumOfTheGrades, 19);
     });
   });
-  
-  describe('Higher Order Functions', function() {
-      it('returns the filtered students', function() {
-        var students = [
-            {name: 'Anna',  grade: 6},
-            {name: 'John',  grade: 4},
-            {name: 'Maria', grade: 9}
-        ];
-        
-        var filterGrade = function(student) {
-            return student.grade > 6;
-        };
-        
-        var filteredStudents = students.filter(filterGrade);
-        
-        assert.deepEqual(filteredStudents, [{name: 'Maria', grade: 9}]);
-      });
-      
-      it('returns the calculation', function() {
-        var sum = function(x, y) {
-            return x + y;
-        };
-        
-        var mult = function(x, y) {
-            return x * y;  
-        };
-        
-        var calculate;
-        
-        assert.equal(calculate(sum, 10, 2), 12);
-        assert.equal(calculate(mult, 10, 2), 20);
-      });
+
+  describe('Higher Order Functions', function () {
+    it('returns the filtered students', function () {
+      var students = [
+        { name: 'Anna', grade: 6 },
+        { name: 'John', grade: 4 },
+        { name: 'Maria', grade: 9 }
+      ];
+
+      var filterGrade = function (student) {
+        return student.grade > 6;
+      };
+
+      var filteredStudents = students.filter(filterGrade);
+
+      assert.deepEqual(filteredStudents, [{ name: 'Maria', grade: 9 }]);
+    });
+
+    it('returns the calculation', function () {
+      var sum = function (x, y) {
+        return x + y;
+      };
+
+      var mult = function (x, y) {
+        return x * y;
+      };
+
+      var calculate;
+
+      assert.equal(calculate(sum, 10, 2), 12);
+      assert.equal(calculate(mult, 10, 2), 20);
+    });
   });
-  
-  describe('Currying', function() {
-     it('returns the greeting', function() {
-         var greet = function(greeting) {
-           return function(name) {
-                return greeting + " " + name;    
-           };
-         };
-         
-         var greetHello = greet("Hello");
-         
-         assert.equal(greetHello("Matheus"), "Hello Matheus");
-     });
-     
-     it('returns the sum', function() {
-         var sum;
-         
-         assert.equal(sum(2)(3), 6);
-     });
+
+  describe('Currying', function () {
+    it('returns the greeting', function () {
+      var greet = function (greeting) {
+        return function (name) {
+          return greeting + " " + name;
+        };
+      };
+
+      var greetHello = greet("Hello");
+
+      assert.equal(greetHello("Matheus"), "Hello Matheus");
+    });
+
+    it('returns the sum', function () {
+      var sum;
+
+      assert.equal(sum(2)(3), 6);
+    });
   });
-  
+
 });
