@@ -159,6 +159,14 @@ describe('Functional Programming Workshop', function () {
 
       assert.equal(combinedNames, 'AnnaJohnMaria');
     });
+    
+    it('returns the even numbers', function () {
+      var numbers = [1, 2, 3, 4];
+
+      var evenNumbers;
+
+      assert.deepEqual(evenNumbers, [2, 4]);
+    });
   });
 
   describe('Map + Filter + Reduce', function () {
