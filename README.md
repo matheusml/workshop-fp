@@ -37,6 +37,6 @@ var helloName = function() {
 };
 ```
 
-**2) While/For não podem ser usados. **
+**2) While/For não podem ser usados**
 
 **3) Deixe todos os inputs/outputs das funções explícitos como parâmetros**
