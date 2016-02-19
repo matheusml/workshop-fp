@@ -141,8 +141,8 @@ describe('Functional Programming Workshop', function () {
   describe('Reduce', function () {
     it('returns the total sum', function () {
       var numbers = [1, 2, 3, 4];
-      var sum = numbers.reduce(function (previous, current) {
-        return previous + current;
+      var sum = numbers.reduce(function (acc, current) {
+        return acc + current;
       }, 0);
 
       assert.equal(sum, 10);
