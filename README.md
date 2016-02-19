@@ -6,9 +6,9 @@ Workshop de Programação Funcional
 git clone git@github.com:matheusml/workshop-fp.git
 ```
 
-2) Instale o Mocha
+2) Instale as dependências
 ```
-npm install -g mocha
+npm install
 ```
 
 3) Rode os testes
