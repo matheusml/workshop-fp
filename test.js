@@ -1,3 +1,5 @@
+/// <reference path="typings/mocha/mocha.d.ts"/>
+
 var assert = require('assert');
 
 describe('Functional Programming Workshop', function () {
@@ -75,6 +77,25 @@ describe('Functional Programming Workshop', function () {
       var grades;
 
       assert.deepEqual(grades(students), [6, 4, 9]);
+    });
+    
+    it('returns the array of the names', function () {
+      var students = [
+        { name: 'Anna', grade: 6 },
+        { name: 'John', grade: 4 },
+        { name: 'Maria', grade: 9 }
+      ];
+      
+      var animals = [
+        { name: 'Panda' },
+        { name: 'Elephant' },
+        { name: 'Dog' }
+      ];
+
+      var byNames;
+
+      assert.deepEqual(byNames(students), ['Anna', 'John', 'Maria']);
+      assert.deepEqual(byNames(animals), ['Panda', 'Elephant', 'Dog']);
     });
   });
 
@@ -201,9 +222,21 @@ describe('Functional Programming Workshop', function () {
     });
 
     it('returns the sum', function () {
-      var sum;
+      var sum; // x + y
 
       assert.equal(sum(2)(3), 6);
+    });
+    
+    it('returns the volume', function () {
+      var volume; // a * b * c
+
+      assert.equal(volume(2)(3)(10), 60);
+    });
+    
+    it('returns the object', function () {
+      var student; // {firstName: 'Matheus', lastName: 'Lima', age: 26}
+      
+      assert.equal(student('Matheus')('Lima')(26), {firstName: 'Matheus', lastName: 'Lima', age: 26});
     });
   });
 
