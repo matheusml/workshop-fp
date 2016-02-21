@@ -247,5 +247,63 @@ describe('Functional Programming Workshop', function () {
       assert.equal(student('Matheus')('Lima')(26), {firstName: 'Matheus', lastName: 'Lima', age: 26});
     });
   });
+  
+  describe('Compose', function () {
+    it('returns the capitalized to upper case string', function () {
+      var compose = function(f, g) {
+        return function(x) {
+            return f(g(x));
+        };  
+      };
+      
+      var reverse = function(x) {
+        return x.split("").reverse().join("");  
+      };
+      
+      var toUpperCase = function(x) {
+        return x.toUpperCase();  
+      };
+      
+      var reversedUpperCase = compose(reverse, toUpperCase);
+
+      assert.equal(reversedUpperCase('hello'), 'OLLEH');
+    });
+    
+    it('returns the "angry" string', function () {
+      var compose = function(f, g) {
+        return function(x) {
+            return f(g(x));
+        };  
+      };
+      
+      var angry;
+
+      assert.equal(angry('hello'), 'HELLO!!!');
+    });
+    
+    it('returns the number of words', function () {
+      var compose = function(f, g) {
+        return function(x) {
+            return f(g(x));
+        };  
+      };
+     
+      var numberOfWords;
+
+      assert.deepEqual(numberOfWords('hello my friend'), 3);
+    });
+    
+    it('returns the "angry" reversed string', function () {
+      var compose = function(f, g) {
+        return function(x) {
+            return f(g(x));
+        };  
+      };
+      
+      var angryReversed;
+
+      assert.equal(angryReversed('hello'), '!!!OLLEH');
+    });
+  });
 
 });
