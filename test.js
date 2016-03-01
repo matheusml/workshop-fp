@@ -63,6 +63,9 @@ describe('Functional Programming Workshop', function () {
             var roots = numbers.map(function (number) {
                 return Math.sqrt(number);
             });
+            
+            // or like this:
+            // var roots = numbers.map(Math.sqrt);
 
             assert.deepEqual(roots, [1, 2, 3]);
         });
