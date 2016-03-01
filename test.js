@@ -172,7 +172,7 @@ describe('Functional Programming Workshop', function () {
         });
     });
 
-    describe('Map + Filter + Reduce', function () {
+    describe('Map + Reduce', function () {
         it('returns the total sum of the grades', function () {
             var students = [
                 { name: 'Anna', grade: 6 },
