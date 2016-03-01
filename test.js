@@ -123,7 +123,7 @@ describe('Functional Programming Workshop', function () {
 
             assert.deepEqual(filterApprovedStudents(),
                 [{ name: 'Anna', grade: 6 },
-                    { name: 'Maria', grade: 9 }]);
+                 { name: 'Maria', grade: 9 }]);
         });
     });
 
