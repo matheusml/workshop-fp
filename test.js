@@ -23,7 +23,7 @@ describe('Functional Programming Workshop', function () {
                 return Math.round((end - start) / (1000 * 60 * 60 * 24));
             };
 
-            assert.equal(daysThisMonth(), daysInMonth(2016, 2));
+            assert.equal(daysThisMonth(), daysInMonth(2016, 3));
         });
 
         it('returns the increment', function () {
