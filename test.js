@@ -16,7 +16,7 @@ describe('Functional Programming Workshop', function () {
                 return Math.round((end - start) / (1000 * 60 * 60 * 24));
             };
       
-            // impure
+            // pure
             var daysInMonth = function (year, month) {
                 var start = new Date(year, month - 1, 1);
                 var end = new Date(year, month, 1);
