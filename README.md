@@ -18,7 +18,7 @@ mocha
 
 Ajuste os blocos de código no arquivo ```test.js``` para que os testes passem.
 
-Os ajustes devem seguir duas regras:
+Os ajustes devem seguir essas regras:
 
 **1) Não modificar dados externos.**
 
