@@ -41,7 +41,7 @@ var helloName = function() {
 };
 
 // pure
-var helloName = function() {
+var helloName = function(name) {
     return "Olá " + name;
 };
 ```
