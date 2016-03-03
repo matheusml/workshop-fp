@@ -18,25 +18,30 @@ mocha
 
 Ajuste os blocos de código no arquivo ```test.js``` para que os testes passem.
 
-Os ajustes devem seguir duas regras:
+Todos os ajustes devem ser feitos criando funções puras.
 
-**1) Não modificar dados externos.**
+Funções puras:
+
+1. Não criam side-effects
+
+2. O output é gerado apenas pelo(s) input(s)
+
+3. Sempre retorna o mesmo resultado dados os mesmos parâmetros
+
+Exemplo:
+
 
 ```javascript
 var name = "Matheus";
 
-// NÃO PODE
+// impura
 var helloName = function() {
     name = "Olá " + name;
     return name;
 };
 
-// PODE
+// pure
 var helloName = function() {
     return "Olá " + name;
 };
 ```
-
-**2) While/For não podem ser usados**
-
-**3) Deixe todos os inputs/outputs das funções explícitos como parâmetros**
