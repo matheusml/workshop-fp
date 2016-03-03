@@ -6,6 +6,11 @@ Clone o projeto
 git clone https://github.com/matheusml/workshop-fp.git
 ```
 
+Entre na pasta do projeto
+```
+cd workshop-fp
+```
+
 Instale o mocha
 ```
 npm install -g mocha
