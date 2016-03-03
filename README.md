@@ -3,12 +3,12 @@ Workshop de Programação Funcional
 
 Clone o projeto
 ```
-git clone git@github.com:matheusml/workshop-fp.git
+git clone https://github.com/matheusml/workshop-fp.git
 ```
 
-Instale as dependências
+Instale o mocha
 ```
-npm install
+npm install -g mocha
 ```
 
 Rode os testes
