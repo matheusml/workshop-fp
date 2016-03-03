@@ -1,17 +1,17 @@
 Workshop de Programação Funcional
 =================
 
-**1) Clone o projeto**
+Clone o projeto
 ```
 git clone git@github.com:matheusml/workshop-fp.git
 ```
 
-**2) Instale as dependências**
+Instale as dependências
 ```
 npm install
 ```
 
-**3) Rode os testes**
+Rode os testes
 ```
 mocha
 ```
