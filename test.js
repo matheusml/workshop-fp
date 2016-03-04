@@ -15,7 +15,7 @@ describe('Functional Programming Workshop', function () {
                 var end = new Date(year, month + 1, 1);
                 return Math.round((end - start) / (1000 * 60 * 60 * 24));
             };
-      
+            
             // pure
             var daysInMonth = function (year, month) {
                 var start = new Date(year, month - 1, 1);
@@ -30,30 +30,34 @@ describe('Functional Programming Workshop', function () {
             var counter = 0;
 
             // impure
-            var increment = function () {
-                counter = counter + 1;
-                return counter;
-            };
+            //var increment = function () {
+              //  counter = counter + 1;
+              //  return counter;
+            //};
       
             // pure
-            // var increment = function() {};
+            var increment = function(counter) {
+                return counter + 1;
+            };
       
-            assert.equal(increment(), counter + 1);
+            assert.equal(increment(counter), counter + 1);
         });
 
         it('returns the square', function () {
             var x = 10;
 
             // impure
-            var square = function () {
-                x = x * 2;
-                return x;
-            };
+            //var square = function () {
+               // x = x * 2; 
+              //  return x;
+            //};
       
             // pure
-            // var square = function() {};
+            var square = function(x) {
+                return x * 2;
+            };
       
-            assert.equal(square(), x * 2);
+            assert.equal(square(x), x * 2);
         });
     });
 
@@ -65,7 +69,7 @@ describe('Functional Programming Workshop', function () {
             });
             
             // or like this:
-            // var roots = numbers.map(Math.sqrt);
+            //var roots = numbers.map(Math.sqrt);
 
             assert.deepEqual(roots, [1, 2, 3]);
         });
@@ -76,10 +80,12 @@ describe('Functional Programming Workshop', function () {
                 { name: 'John', grade: 4 },
                 { name: 'Maria', grade: 9 }
             ];
+            
+            var grades = students.map(function(student) {
+                return student.grade;    
+            });
 
-            var grades;
-
-            assert.deepEqual(grades(students), [6, 4, 9]);
+            assert.deepEqual(grades, [6, 4, 9]);
         });
 
         it('returns the array of the names', function () {
@@ -95,7 +101,11 @@ describe('Functional Programming Workshop', function () {
                 { name: 'Dog' }
             ];
 
-            var byNames;
+            var byNames = function(array) {
+                return array.map(function(item) {
+                   return item.name; 
+                });  
+            };
 
             assert.deepEqual(byNames(students), ['Anna', 'John', 'Maria']);
             assert.deepEqual(byNames(animals), ['Panda', 'Elephant', 'Dog']);
@@ -119,9 +129,11 @@ describe('Functional Programming Workshop', function () {
                 { name: 'Maria', grade: 9 }
             ];
 
-            var filterApprovedStudents;
+            var filterApprovedStudents = students.filter(function(student) {
+                return student.grade >= 6;
+            });
 
-            assert.deepEqual(filterApprovedStudents(),
+            assert.deepEqual(filterApprovedStudents,
                 [{ name: 'Anna', grade: 6 },
                  { name: 'Maria', grade: 9 }]);
         });
@@ -135,9 +147,14 @@ describe('Functional Programming Workshop', function () {
                 { name: 'Maria', grade: 9 }
             ];
 
-            var filterApprovedStudentsByName;
+            var filterApprovedStudentsByName = 
+                students.filter(function(student) {
+                    return student.grade >= 6;
+                }).map(function(student) {
+                    return student.name;
+                });
 
-            assert.deepEqual(filterApprovedStudentsByName(), ['Anna', 'Maria']);
+            assert.deepEqual(filterApprovedStudentsByName, ['Anna', 'Maria']);
         });
     });
 
@@ -158,7 +175,9 @@ describe('Functional Programming Workshop', function () {
                 { name: 'Maria', grade: 9 }
             ];
 
-            var combinedNames;
+            var combinedNames = students.reduce(function(acc, current) {
+                return acc + current.name;
+            }, '');
 
             assert.equal(combinedNames, 'AnnaJohnMaria');
         });
@@ -166,7 +185,12 @@ describe('Functional Programming Workshop', function () {
         it('returns the even numbers', function () {
             var numbers = [1, 2, 3, 4];
 
-            var evenNumbers;
+            var evenNumbers = numbers.reduce(function(acc, current) {
+                if (current % 2 === 0) {
+                    acc.push(current);
+                }
+                return acc;
+            }, []);
 
             assert.deepEqual(evenNumbers, [2, 4]);
         });
@@ -180,7 +204,11 @@ describe('Functional Programming Workshop', function () {
                 { name: 'Maria', grade: 9 }
             ];
 
-            var totalSumOfTheGrades;
+            var totalSumOfTheGrades = students.map(function(student) {
+              return student.grade;  
+            }).reduce(function(acc, current) {
+              return acc + current;  
+            }, 0);
 
             assert.equal(totalSumOfTheGrades, 19);
         });
@@ -212,7 +240,9 @@ describe('Functional Programming Workshop', function () {
                 return x * y;
             };
 
-            var calculate;
+            var calculate = function(fn, x, y) {
+                return fn(x, y);        
+            };
 
             assert.equal(calculate(sum, 10, 2), 12);
             assert.equal(calculate(mult, 10, 2), 20);
@@ -233,21 +263,41 @@ describe('Functional Programming Workshop', function () {
         });
 
         it('returns the sum', function () {
-            var sum; // x + y
+            var sum = function(x) {
+                return function(y) {
+                    return x + y;
+                };
+            };
 
-            assert.equal(sum(2)(3), 6);
+            assert.equal(sum(2)(3), 5);
         });
 
         it('returns the volume', function () {
-            var volume; // a * b * c
+            var volume = function(x) {
+                return function(y) {
+                    return function(z) {
+                        return x * y * z;
+                    };
+                };
+            };
 
             assert.equal(volume(2)(3)(10), 60);
         });
 
         it('returns the object', function () {
-            var student; // {firstName: 'Matheus', lastName: 'Lima', age: 26}
-      
-            assert.equal(student('Matheus')('Lima')(26), { firstName: 'Matheus', lastName: 'Lima', age: 26 });
+            var student = function(firstName) {
+                return function(lastName) {
+                    return function(age) {
+                        return {
+                            firstName: firstName,
+                            lastName: lastName,
+                            age: age    
+                        }; 
+                    }; 
+                };    
+            };
+            
+            assert.deepEqual(student('Matheus')('Lima')(26), { firstName: 'Matheus', lastName: 'Lima', age: 26 });
         });
     });
 
@@ -278,8 +328,16 @@ describe('Functional Programming Workshop', function () {
                     return f(g(x));
                 };
             };
+            
+            var toUpperCase = function (x) {
+                return x.toUpperCase();
+            };
+            
+            var exclaim = function(x) {
+                return x + '!!!';  
+            };
 
-            var angry;
+            var angry = compose(toUpperCase, exclaim);
 
             assert.equal(angry('hello'), 'HELLO!!!');
         });
@@ -290,8 +348,16 @@ describe('Functional Programming Workshop', function () {
                     return f(g(x));
                 };
             };
+            
+            var split = function(x) {
+                return x.split(' ');
+            };
+            
+            var length = function(x) {
+                return x.length;    
+            };
 
-            var numberOfWords;
+            var numberOfWords = compose(length, split);
 
             assert.deepEqual(numberOfWords('hello my friend'), 3);
         });
@@ -302,8 +368,21 @@ describe('Functional Programming Workshop', function () {
                     return f(g(x));
                 };
             };
+            
+            var toUpperCase = function (x) {
+                return x.toUpperCase();
+            };
+            
+            var exclaim = function(x) {
+                return x + '!!!';  
+            };
+            
+            var reverse = function (x) {
+                return x.split("").reverse().join("");
+            };
 
-            var angryReversed;
+            var angry = compose(toUpperCase, exclaim);
+            var angryReversed = compose(reverse, angry);
 
             assert.equal(angryReversed('hello'), '!!!OLLEH');
         });
